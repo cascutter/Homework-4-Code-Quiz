@@ -1,81 +1,120 @@
 // Clicking Start button begins the timer
 // Countdown timer
-//var startQuizBtn = document.getElementById("button");
-//var timer = document.getElementById("timer");
-//function startTimer() {
-//  var eightMin = 8 * 60;
-//  setInterval(function () {
-//      eightMin--
-//      var minutes = eightMin / 60;
-//      var seconds = eightMin % 60;
-//      timer.textContent = (Math.floor(minutes)) + " : " + (Math.floor(seconds));
-//  }, 1000)
-//}
-//startQuizBtn.addEventListener ("click", startTimer);
-//
-//// Variable declarations
-//var start = document.getElementById("start");
-//var quiz = document.getElementById("quiz");
-//var questions = document.getElementById("questions");
-//var answers = document.getElementById("answers");
-//var choiceA = document.getElementById("choiceA");
-//var choiceB = document.getElementById("choiceB");
-//var choiceC = document.getElementById("choiceC");
-//var choiceD = document.getElementById("choiceD");
-
-// Questions are on the screen with multiple choice answers
-//Question generator
-
-var questions = [
-    {
-        question: "Do you like pina coladas?",
-        answerChoices: ["sort of", "yes", "no", "ew"],
-        correctAnswer: "no"
-    },
-    {
-        question: "",
-        answersChoices: {
-            choiceA:"",
-            choiceB:"",
-            choiceC:"",
-            choiceD:""
-        },
-        correctAnswer: ""
-    },
-    {
-        question: "",
-        answersChoices: {
-            choiceA:"",
-            choiceB:"",
-            choiceC:"",
-            choiceD:""
-        },
-        correctAnswer: ""
-    },
-
-];
-
-var mainEl = document.getElementById("main");
-var questionEl = document.createElement("div");
-var increment = 0
-
-questionEl.textContent = questions[increment].question;
-mainEl.append(questionEl)
-
-for (var i = 0; i < questions[increment].answerChoices.length; i++) {
-    var answerChoiceEl = document.createElement("div");
-    answerChoiceEl.addEventListener("click", function (){
-        var answerSelected = this.textContent
-        if (answerSelected === questions[increment].correctAnswer) {
-            console.log("You did it!");
-        } else {
-            console.log("This ain't it.");
+function startTimer() {
+    var time = 90;
+    //Setting timer interval
+    var timerCount = setInterval(function () {
+        time--
+        var minutes = Math.floor(time / 60);
+        var seconds = Math.floor(time % 60);
+        //Formatting seconds to include zero if less than 10 i.e. 09
+        if (seconds < 10) {
+          seconds = "0" + seconds
         }
-    })
-    answerChoiceEl.textContent = questions[increment].answerChoices[i];
-    mainEl.append(answerChoiceEl); 
-    }
+        timer.textContent = "Time Left: " + minutes + ":" + seconds;
+        //Clearing timer interval
+        if (time === 0) {
+          clearInterval(timerCount);
+          timer.textContent= "TIME'S UP!";
+        }
+    }, 1000)
+  }
+timer.addEventListener("click", startTimer);
+timer.addEventListener("click", getQuestion);
+// Questions on screen with multiple choice answers
+//Question generator
+//function startQuiz() {
+    var questions = [
+        {
+            question: "JavaScript is...",
+            answerChoices: ["Subjective", "Objective", "Object based", "Evil"],
+            correctAnswer: "Object based"
+        },
+        {
+            question: "What does the following expression return? 1 + 5 + 'cans of soda' ",
+            answerChoices: ["15 cans of soda","6 cans of soda","Undefined","5 cans of soda"],
+            correctAnswer: "6 cans of soda"
+        },
+        {
+            question: "Which of these is the correct mehod for creating a new array?",
+            answerChoices: ["var myArray = ()", "var myArray = {}", "var myArray = []", "var myArray = array.length"],
+            correctAnswer: "var myArray = []"
+        },
+        {
+            question: "question 4",
+            answerChoices: ["a", "b", "c", "d"],
+            correctAnswer: "a"
+        },
+        {
+            question: "question 5",
+            answerChoices: ["a", "b", "c", "d"],
+            correctAnswer: "a"
+        },
+        {
+            question: "question 6",
+            answerChoices: ["a", "b", "c", "d"],
+            correctAnswer: "a"
+        },
+        {
+            question: "question 7",
+            answerChoices: ["a", "b", "c", "d"],
+            correctAnswer: "a"
+        },
+        {
+            question: "question 8",
+            answerChoices: ["a", "b", "c", "d"],
+            correctAnswer: "a"
+        },
+        {
+            question: "question 9",
+            answerChoices: ["a", "b", "c", "d"],
+            correctAnswer: "a"
+        },
+        {
+            question: "question 10",
+            answerChoices: ["a", "b", "c", "d"],
+            correctAnswer: "a"
+        },
 
+    ];
+
+    var mainEl = document.getElementById("main");
+    var questionEl = document.createElement("h2");
+    var mainQuestion = document.getElementById("questionDiv");
+    var increment = 0;
+
+function getQuestion () {
+    questionEl.textContent = questions[increment].question;
+    mainQuestion.append(questionEl);
+
+    for (var i = 0; i < questions[increment].answerChoices.length; i++) {
+        var answerChoiceEl = document.createElement("button");
+        answerChoiceEl.addEventListener("click", function (){
+            var answerSelected = this.textContent
+            if (answerSelected === questions[increment].correctAnswer) {
+                console.log("You did it!");
+                mainQuestion.innerHTML = "";
+                increment++;
+                getQuestion();
+            } else {
+                console.log("This ain't it.");
+                mainQuestion.innerHTML = "";
+                increment++;
+                getQuestion();
+            } 
+
+        });
+        answerChoiceEl.textContent = questions[increment].answerChoices[i];
+        mainQuestion.append(answerChoiceEl); 
+    }
+}
+    
+    function answerCorrect() {
+        document.getElementById(answerChoiceEl).style.backgroundColor = "green";
+    }
+    function answerIncorrect() {
+        document.getElementById(answerChoiceEl).style.backgroundColor = "red";
+    }
 
 // When answer is clicked, a new question/choices appears
 // If a question is answered incorrectly, time is removed from the clock
