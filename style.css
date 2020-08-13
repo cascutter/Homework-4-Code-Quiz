@@ -1,3 +1,7 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -6,7 +10,6 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: grey;
 }
 
 img {
@@ -14,23 +17,34 @@ img {
     position: relative;
 }
 
+#timer {
+    font-size: x-large;
+}
 
-
-button {
-    box-sizing: border-box;
-    position: relative;
+#card {
+    width: 800px;
+    max-width: 80%;
+    display: flexbox;
     text-align: center;
-    background-color: teal;
-    padding: 0;
-    margin: 10px;
-   
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0 0 10px 3px;
 }
 
 #main {
+    border-radius: 10px;
+    border: 2px;
+    width: 200px;
     width: 800px;
     max-width: 80%;
+    display: flexbox;
     text-align: center;
-    background-color: hue ;
-    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     box-shadow: 0 0 10px 3px;
+}
+
+#questionDiv {
+    max-width: 800px;
+    position: relative;
 }
