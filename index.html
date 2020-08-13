@@ -10,26 +10,25 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="card mb-3" style="max-width: 800px;">
+            <div class="card mb-5" id="card" style="width: fit-content; max-width: 800px;">
                 <div class="row">
                   <div class="col-md-4">
                     <img src="https://www.buildtechnologygroup.com/wp-content/uploads/2018/03/480px-Unofficial_JavaScript_logo_2.svg_.png" class="card-img" alt="JavaScript image">
                   </div>
                   <div class="col-md-6">
                     <div class="card-body">
-                      <h5 class="card-title">JavaScript Code Quiz</h5>
-                      <p class="card-text">Test you knowledge of JavaScript with this timed quiz.
-                          You have 90 seconds to complete 10 questions. If you get a question wrong, 
-                          you lose 10 seconds!
+                      <h2 class="card-title">JavaScript Code Quiz</h2>
+                      <p class="card-text">Test your knowledge of JavaScript with this timed quiz.
+                          You have 90 seconds to complete 5 questions. If you get a question wrong, 
+                          you lose 10 seconds. Good luck!
                       </p>
-                      <p class="card-text"><small class="text-muted">Press START to begin!</small></p>
                     </div>
                   </div>
                 </div>
               </div>
         </div>
     <div id = "main">
-    <button><h2 id = "timer" class="text-right">Start</h2></button>
+    <button type="button" id = "timer" class="btn btn-warning">Start</button>
     <div id = "questionDiv"></div>
     </div>
 </body>
