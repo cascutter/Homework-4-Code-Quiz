@@ -22,14 +22,14 @@ function startTimer() {
         }
         timer.textContent = "Time Left: " + minutes + ":" + seconds;
         //Clearing timer 
-        if (time === 0) {
-          clearInterval(timerCount);
-          timer.textContent= "TIME'S UP!";
-          var scoreCard = localStorage.getItem(score);
-          var scoreText = document.createEvent(div);
-          scoreText.textContent = "You scored " + scoreCard + " points"
-          mainQuestion.append()
-
+        if (time < 0) {
+            clearInterval(timerCount);
+            timer.textContent= "TIME'S UP!";
+            // Prompt with score and intials input, saved to local storage
+            setTimeout(function() { 
+            prompt("You scored: " + score + " points! Enter your intials below.");
+            localStorage.setItem("Score: ", score);
+            }, 2000);
         }
     }, 1000)
 }
@@ -107,9 +107,24 @@ function getQuestion () {
             } 
         });
         answerChoiceEl.textContent = questions[increment].answerChoices[i];
-        mainQuestion.append(answerChoiceEl);     
+        mainQuestion.append(answerChoiceEl); 
     }
 }
+
+//var form = document.createElement("form");
+        //var inputInitials = document.createElement("input");
+        //inputInitials.setAttribute("id", "initial-input");
+        //inputInitials.setAttribute("type","text");
+        //var formSubmit = document.createElement("button");
+        //mainQuestion.append(form);
+        //form.append(inputInitials);
+       //mainQuestion.append(formSubmit);
+        //formSubmit.textContent = "Submit Initials";
+        //formSubmit.addEventListener("click",function(event){
+          //event.preventDefault();
+          //var initials = document.getElementById("initial-input");
+          //localStorage.setItem("Initials: ", initials.value);
+        //})
 
 // Stops game if timer runs out
 
@@ -118,3 +133,4 @@ function getQuestion () {
 // HIgh score display on screen
 // Allow user to input name
 // Store previous high scores
+
