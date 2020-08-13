@@ -1,4 +1,10 @@
 // Clicking Start button begins the timer
+timer.addEventListener("click", startTimer);
+timer.addEventListener("click", getQuestion);
+document.getElementById("timer").onclick = function() {
+    //disable
+    this.disabled = true;
+}
 // Countdown timer
 function startTimer() {
     var time = 90;
@@ -19,8 +25,9 @@ function startTimer() {
         }
     }, 1000)
   }
-timer.addEventListener("click", startTimer);
-timer.addEventListener("click", getQuestion);
+//timer.addEventListener("click", startTimer);
+//timer.addEventListener("click", getQuestion);
+
 // Questions on screen with multiple choice answers
 //Question generator
 //function startQuiz() {
@@ -41,41 +48,15 @@ timer.addEventListener("click", getQuestion);
             correctAnswer: "var myArray = []"
         },
         {
-            question: "question 4",
-            answerChoices: ["a", "b", "c", "d"],
-            correctAnswer: "a"
+            question: "Which one of these is NOT a logical operator?",
+            answerChoices: ["&", "||", "&&", "!"],
+            correctAnswer: "&"
         },
         {
-            question: "question 5",
-            answerChoices: ["a", "b", "c", "d"],
-            correctAnswer: "a"
+            question: "JavaScript has the following variable types: boolean, number, object, and ",
+            answerChoices: ["double", "order", "string", "console"],
+            correctAnswer: "string"
         },
-        {
-            question: "question 6",
-            answerChoices: ["a", "b", "c", "d"],
-            correctAnswer: "a"
-        },
-        {
-            question: "question 7",
-            answerChoices: ["a", "b", "c", "d"],
-            correctAnswer: "a"
-        },
-        {
-            question: "question 8",
-            answerChoices: ["a", "b", "c", "d"],
-            correctAnswer: "a"
-        },
-        {
-            question: "question 9",
-            answerChoices: ["a", "b", "c", "d"],
-            correctAnswer: "a"
-        },
-        {
-            question: "question 10",
-            answerChoices: ["a", "b", "c", "d"],
-            correctAnswer: "a"
-        },
-
     ];
 
     var mainEl = document.getElementById("main");
@@ -83,12 +64,20 @@ timer.addEventListener("click", getQuestion);
     var mainQuestion = document.getElementById("questionDiv");
     var increment = 0;
 
+// Function which iterates through questions array
 function getQuestion () {
     questionEl.textContent = questions[increment].question;
     mainQuestion.append(questionEl);
-
+// For loop for answer choices
     for (var i = 0; i < questions[increment].answerChoices.length; i++) {
         var answerChoiceEl = document.createElement("button");
+        // Answer button styling (couldn't figure out how to do it on CSS page)
+        answerChoiceEl.style.backgroundColor = "#F0FFFF";
+        answerChoiceEl.style.padding = "10px";
+        answerChoiceEl.style.fontSize = "large";
+        answerChoiceEl.style.borderRadius = "10px";
+        answerChoiceEl.style.marginInlineStart = "10px";
+        // Evenet listener for answer choices
         answerChoiceEl.addEventListener("click", function (){
             var answerSelected = this.textContent
             if (answerSelected === questions[increment].correctAnswer) {
@@ -108,7 +97,16 @@ function getQuestion () {
         mainQuestion.append(answerChoiceEl); 
     }
 }
-    
+//Create function that:
+// Decreases time if answer is wrong
+// Adds points if answer is right
+// Stops game if timer runs out
+
+//Highscore
+// Keep track of high score
+// HIgh score display on screen
+// Allow user to input name
+// Store previous high scores
     function answerCorrect() {
         document.getElementById(answerChoiceEl).style.backgroundColor = "green";
     }
