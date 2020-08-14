@@ -13,26 +13,33 @@ function startTimer() {
     time = 90;
     // Setting timer
     var timerCount = setInterval(function () {
-        time--
+        time--;
         minutes = Math.floor(time / 60);
         seconds = Math.floor(time % 60);
         // Seconds
         if (seconds < 10) {
-          seconds = "0" + seconds
+          seconds = "0" + seconds;
         }
         timer.textContent = "Time Left: " + minutes + ":" + seconds;
         //Clearing timer 
-        if (time < 0) {
+       if (time <= 0 || (increment === questions.length + 1)) {
             clearInterval(timerCount);
             timer.textContent= "TIME'S UP!";
             // Prompt with score and intials input, saved to local storage
             setTimeout(function() { 
-            prompt("You scored: " + score + " points! Enter your intials below.");
-            localStorage.setItem("Score: ", score);
-            }, 2000);
+            var initials = prompt("You scored: " + score + " points! Enter your initials below.");
+            var userData = [initials , score];
+            localStorage.setItem("user data", JSON.stringify(userData));
+            var stats = JSON.parse(localStorage.getItem("user data"));
+            }, 1000);
         }
     }, 1000)
 }
+
+//let itemsArray = []
+
+//localStorage.setItem('items', JSON.stringify(itemsArray))
+//const data = JSON.parse(localStorage.getItem('items'))
 
 // Question and answer choice object arrays
 var questions = [
@@ -70,7 +77,6 @@ var mainQuestion = document.getElementById("questionDiv");
 var increment = 0;
 var score = 0;
 
-
 // Function which iterates through questions array
 function getQuestion () {
     questionEl.textContent = questions[increment].question;
@@ -78,7 +84,7 @@ function getQuestion () {
     // For loop for answer choices
     for (var i = 0; i < questions[increment].answerChoices.length; i++) {
         var answerChoiceEl = document.createElement("button");
-        // Answer button styling (couldn't figure out how to do it on CSS page)
+        // Answer button styling (couldn't figure out how to do it in CSS page)
         answerChoiceEl.style.backgroundColor = "#F0FFFF";
         answerChoiceEl.style.padding = "10px";
         answerChoiceEl.style.fontSize = "large";
@@ -105,29 +111,14 @@ function getQuestion () {
                 increment++;
                 getQuestion();
             } 
+            if (increment === questions.length) {
+                clearInterval(timerCount);
+            }
         });
         answerChoiceEl.textContent = questions[increment].answerChoices[i];
         mainQuestion.append(answerChoiceEl); 
     }
 }
-
-//var form = document.createElement("form");
-        //var inputInitials = document.createElement("input");
-        //inputInitials.setAttribute("id", "initial-input");
-        //inputInitials.setAttribute("type","text");
-        //var formSubmit = document.createElement("button");
-        //mainQuestion.append(form);
-        //form.append(inputInitials);
-       //mainQuestion.append(formSubmit);
-        //formSubmit.textContent = "Submit Initials";
-        //formSubmit.addEventListener("click",function(event){
-          //event.preventDefault();
-          //var initials = document.getElementById("initial-input");
-          //localStorage.setItem("Initials: ", initials.value);
-        //})
-
-// Stops game if timer runs out
-
 //Highscore
 // Keep track of high score
 // HIgh score display on screen
