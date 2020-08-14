@@ -22,15 +22,19 @@ function startTimer() {
         }
         timer.textContent = "Time Left: " + minutes + ":" + seconds;
         //Clearing timer 
-       if (time <= 0 || (increment === questions.length + 1)) {
+       if (time <= 0 || stopTimer) {
             clearInterval(timerCount);
             timer.textContent= "TIME'S UP!";
             // Prompt with score and intials input, saved to local storage
             setTimeout(function() { 
-            var initials = prompt("You scored: " + score + " points! Enter your initials below.");
-            var userData = [initials , score];
-            localStorage.setItem("user data", JSON.stringify(userData));
-            var stats = JSON.parse(localStorage.getItem("user data"));
+            alert("You scored: " + score + " points.");
+            var initials = prompt("Enter your initials below.");
+            var currentRoundScore = [initials , score];
+            //var highScore = 0;
+            if (score > localStorage.getItem(currentRoundScore)) {
+                localStorage.setItem("High Score", JSON.stringify(currentRoundScore));
+                alert("You set a new high score of " + score +"!");
+            }
             }, 1000);
         }
     }, 1000)
@@ -49,9 +53,9 @@ var questions = [
         correctAnswer: "Object based"
     },
     {
-        question: "What does the following expression return? 1 + 5 + 'cans of soda' ",
-        answerChoices: ["15 cans of soda","6 cans of soda","Undefined","5 cans of soda"],
-        correctAnswer: "6 cans of soda"
+        question: "What does the following expression return? 1 + 5 + 'cats' ",
+        answerChoices: ["15 cats","6 cats","Undefined","5 cats"],
+        correctAnswer: "6 ca"
     },
     {
         question: "Which of these is the correct mehod for creating a new array?",
@@ -76,6 +80,7 @@ var questionEl = document.createElement("h2");
 var mainQuestion = document.getElementById("questionDiv");
 var increment = 0;
 var score = 0;
+var stopTimer;
 
 // Function which iterates through questions array
 function getQuestion () {
@@ -111,14 +116,18 @@ function getQuestion () {
                 increment++;
                 getQuestion();
             } 
-            if (increment === questions.length) {
-                clearInterval(timerCount);
-            }
+            var stopTimer = setTimeout(function() {
+                for (var i = stopTimer; i > 0; i--)
+                clearInterval(i);
+            }, 3000);
         });
         answerChoiceEl.textContent = questions[increment].answerChoices[i];
         mainQuestion.append(answerChoiceEl); 
     }
 }
+
+
+
 //Highscore
 // Keep track of high score
 // HIgh score display on screen
