@@ -8,7 +8,6 @@ document.getElementById("timer").onclick = function() {
 
 // Countdown timer
 var time;
-
 function startTimer() {
     time = 90;
     // Setting timer
@@ -30,7 +29,7 @@ function startTimer() {
             alert("You scored: " + score + " points.");
             var initials = prompt("Enter your initials below.");
             var currentRoundScore = [initials , score];
-            //var highScore = 0;
+            //Logs current score; still working on how to make it only save the highest score
             if (score > localStorage.getItem(currentRoundScore)) {
                 localStorage.setItem("High Score", JSON.stringify(currentRoundScore));
                 alert("You set a new high score of " + score +"!");
@@ -39,11 +38,6 @@ function startTimer() {
         }
     }, 1000)
 }
-
-//let itemsArray = []
-
-//localStorage.setItem('items', JSON.stringify(itemsArray))
-//const data = JSON.parse(localStorage.getItem('items'))
 
 // Question and answer choice object arrays
 var questions = [
@@ -80,8 +74,6 @@ var questionEl = document.createElement("h2");
 var mainQuestion = document.getElementById("questionDiv");
 var increment = 0;
 var score = 0;
-var questionNumber = 0;
-var stopTimer;
 
 // Function which iterates through questions array
 function getQuestion () {
@@ -117,11 +109,6 @@ function getQuestion () {
                 increment++;
                 getQuestion();
             } 
-            //Stops timer when questions are done *currently stopping after 2 questions
-            //if (increment <= 0) {
-                    //clearInterval(timerCount);
-                //}
-            //)}
         });
         answerChoiceEl.textContent = questions[increment].answerChoices[i];
         mainQuestion.append(answerChoiceEl); 
