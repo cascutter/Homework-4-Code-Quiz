@@ -51,6 +51,8 @@ function getQuestion () {
 
 ## Features
 
+<img src = assets/code-quiz.gif>
+
 * When the 'start' button is clicked, the timer begins and the first question and answer choice group is presented
 
 * If the question is answered correctly, 10 points are added and written to the console
@@ -60,4 +62,9 @@ function getQuestion () {
 * Once the time is up OR all the questions have been answered, the user is presented with an alert indicating their score.
 
 * The user is prompted to input their intitials and the user data is then logged into the local storage.
+
+## Author
+
+* Casandra Cutter
+* H/t David Garza; Danielle Bowman; Analee Guerra; GitHub; MDN web docs; w3schools.com
 
