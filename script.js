@@ -29,7 +29,7 @@ function startTimer() {
             alert("You scored: " + score + " points.");
             var initials = prompt("Enter your initials below.");
             var currentRoundScore = [initials , score];
-            //Logs current score; still working on how to make it only save the highest score
+            //Logs current score; Could not get it to replace current score with highest score
             if (score > localStorage.getItem(currentRoundScore)) {
                 localStorage.setItem("High Score", JSON.stringify(currentRoundScore));
                 alert("You set a new high score of " + score +"!");
@@ -82,7 +82,8 @@ function getQuestion () {
     // For loop for answer choices
     for (var i = 0; i < questions[increment].answerChoices.length; i++) {
         var answerChoiceEl = document.createElement("button");
-        // Answer button styling (couldn't figure out how to do it in CSS page)
+        // Answer button styling 
+        // I see the limitations of creating the buttons in js as opposed to HTML
         answerChoiceEl.style.backgroundColor = "#F0FFFF";
         answerChoiceEl.style.padding = "10px";
         answerChoiceEl.style.fontSize = "large";
@@ -112,7 +113,7 @@ function getQuestion () {
         });
         answerChoiceEl.textContent = questions[increment].answerChoices[i];
         mainQuestion.append(answerChoiceEl); 
-    }
+    }  
 }
 
 
