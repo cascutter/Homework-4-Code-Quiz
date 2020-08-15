@@ -21,8 +21,8 @@ function startTimer() {
           seconds = "0" + seconds;
         }
         timer.textContent = "Time Left: " + minutes + ":" + seconds;
-        //Clearing timer 
-       if (time <= 0 || stopTimer) {
+        //Clearing timer when time is up or questions are finished
+       if (time <= 0 || increment === 5) {
             clearInterval(timerCount);
             timer.textContent= "TIME'S UP!";
             // Prompt with score and intials input, saved to local storage
@@ -50,27 +50,27 @@ var questions = [
     {
         question: "JavaScript is...",
         answerChoices: ["Subjective", "Objective", "Object based", "Evil"],
-        correctAnswer: "Object based"
+        correctAnswer: "Object based",
     },
     {
         question: "What does the following expression return? 1 + 5 + 'cats' ",
         answerChoices: ["15 cats","6 cats","Undefined","5 cats"],
-        correctAnswer: "6 ca"
+        correctAnswer: "6 cats",
     },
     {
         question: "Which of these is the correct mehod for creating a new array?",
         answerChoices: ["var myArray = ()", "var myArray = {}", "var myArray = []", "var myArray = array.length"],
-        correctAnswer: "var myArray = []"
+        correctAnswer: "var myArray = []",
     },
     {
         question: "Which one of these is NOT a logical operator?",
         answerChoices: ["&", "||", "&&", "!"],
-        correctAnswer: "&"
+        correctAnswer: "&",
     },
     {
         question: "JavaScript has the following variable types: boolean, number, object, and ",
         answerChoices: ["double", "order", "string", "console"],
-        correctAnswer: "string"
+        correctAnswer: "string",
     },
 ];
 
@@ -80,6 +80,7 @@ var questionEl = document.createElement("h2");
 var mainQuestion = document.getElementById("questionDiv");
 var increment = 0;
 var score = 0;
+var questionNumber = 0;
 var stopTimer;
 
 // Function which iterates through questions array
@@ -116,21 +117,15 @@ function getQuestion () {
                 increment++;
                 getQuestion();
             } 
-            var stopTimer = setTimeout(function() {
-                for (var i = stopTimer; i > 0; i--)
-                clearInterval(i);
-            }, 3000);
+            //Stops timer when questions are done *currently stopping after 2 questions
+            //if (increment <= 0) {
+                    //clearInterval(timerCount);
+                //}
+            //)}
         });
         answerChoiceEl.textContent = questions[increment].answerChoices[i];
         mainQuestion.append(answerChoiceEl); 
     }
 }
 
-
-
-//Highscore
-// Keep track of high score
-// HIgh score display on screen
-// Allow user to input name
-// Store previous high scores
 
